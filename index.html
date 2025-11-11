@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Tour Du Lịch</title>
+    <style>
+        /* Reset cơ bản */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background-color: #2c3e50;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #1a252f;
+            font-size: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #34495e;
+        }
+
+        /* Main content */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 20px;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Table danh sách tour */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            color: #777;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 6px 12px;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Quản Lý Tour</h2>
+        <ul>
+            <li>Dashboard</li>
+            <li>Quản lý Tour</li>
+            <li>Quản lý Đặt Tour</li>
+            <li>Khách Hàng</li>
+            <li>Báo Cáo</li>
+            <li>Cài Đặt</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">Danh Sách Tour</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Tour</th>
+                    <th>Loại Tour</th>
+                    <th>Giá</th>
+                    <th>Thời Gian</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Tour Hà Nội - Hạ Long</td>
+                    <td>Trong nước</td>
+                    <td>2,500,000 VND</td>
+                    <td>3 ngày 2 đêm</td>
+                    <td>
+                        <a href="#" class="btn">Sửa</a>
+                        <a href="#" class="btn">Xóa</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Tour Paris - Rome</td>
+                    <td>Quốc tế</td>
+                    <td>35,000,000 VND</td>
+                    <td>7 ngày 6 đêm</td>
+                    <td>
+                        <a href="#" class="btn">Sửa</a>
+                        <a href="#" class="btn">Xóa</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Tour Miền Tây</td>
+                    <td>Trong nước</td>
+                    <td>1,800,000 VND</td>
+                    <td>2 ngày 1 đêm</td>
+                    <td>
+                        <a href="#" class="btn">Sửa</a>
+                        <a href="#" class="btn">Xóa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            &copy; 2025 Công Ty Du Lịch ABC
+        </div>
+    </div>
+</body>
+</html>
