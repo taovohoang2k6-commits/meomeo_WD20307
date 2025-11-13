@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý Tour Du Lịch</title>
+  <style>
+    /* Reset cơ bản */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    body { display: flex; min-height: 100vh; background-color: #f4f4f4; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: #2c3e50;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .sidebar h2 {
+      text-align: center;
+      padding: 20px 0;
+      border-bottom: 1px solid #34495e;
+      font-size: 20px;
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar ul li {
+      padding: 15px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid #34495e;
+    }
+    .sidebar ul li:hover {
+      background-color: #34495e;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    h1 { margin-bottom: 20px; color: #2c3e50; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table, th, td { border: 1px solid #ccc; }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #ecf0f1;
+    }
+
+    /* Buttons */
+    button {
+      padding: 8px 15px;
+      margin: 5px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    button:hover { background-color: #3498db; }
+
+    /* Form */
+    form {
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .tab {
+      padding: 10px 20px;
+      background: #bdc3c7;
+      margin-right: 5px;
+      border-radius: 3px 3px 0 0;
+    }
+    .tab.active {
+      background: #2980b9;
+      color: white;
+    }
+    .tab-content { display: none; background: #fff; padding: 15px; border-radius: 0 5px 5px 5px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    .tab-content.active { display: block; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Tour Manager</h2>
+    <ul>
+      <li onclick="showSection('tours')">Danh mục tour</li>
+      <li onclick="showSection('bookings')">Booking</li>
+      <li onclick="showSection('hdv')">Hướng dẫn viên</li>
+      <li onclick="showSection('schedule')">Lịch tour</li>
+      <li onclick="showSection('report')">Báo cáo</li>
+    </ul>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <!-- Danh mục tour -->
+    <div id="tours" class="section">
+      <h1>Danh mục tour</h1>
+      <div class="tabs">
+        <div class="tab active" onclick="openTab(event, 'domestic')">Trong nước</div>
+        <div class="tab" onclick="openTab(event, 'international')">Quốc tế</div>
+        <div class="tab" onclick="openTab(event, 'custom')">Theo yêu cầu</div>
+      </div>
+
+      <div id="domestic" class="tab-content active">
+        <form>
+          <h3>Thêm tour trong nước</h3>
+          <input type="text" placeholder="Tên tour">
+          <input type="text" placeholder="Thời gian">
+          <input type="number" placeholder="Giá cơ bản">
+          <button>Thêm</button>
+        </form>
+        <table>
+          <tr><th>Tên tour</th><th>Thời gian</th><th>Giá</th><th>Hành động</th></tr>
+          <tr><td>Hà Nội - Sapa</td><td>3 ngày</td><td>3,000,000</td><td><button>Sửa</button><button>Xóa</button></td></tr>
+        </table>
+      </div>
+
+      <div id="international" class="tab-content">
+        <p>Tour quốc tế</p>
+      </div>
+      <div id="custom" class="tab-content">
+        <p>Tour theo yêu cầu</p>
+      </div>
+    </div>
+
+    <!-- Booking -->
+    <div id="bookings" class="section" style="display:none;">
+      <h1>Quản lý booking</h1>
+      <form>
+        <h3>Thêm booking mới</h3>
+        <input type="text" placeholder="Tên khách">
+        <input type="number" placeholder="Số lượng">
+        <select>
+          <option>Tour trong nước</option>
+          <option>Tour quốc tế</option>
+          <option>Tour theo yêu cầu</option>
+        </select>
+        <input type="date">
+        <textarea placeholder="Yêu cầu đặc biệt"></textarea>
+        <button>Lưu booking</button>
+      </form>
+      <table>
+        <tr><th>Khách</th><th>Tour</th><th>Số lượng</th><th>Ngày đi</th><th>Trạng thái</th><th>Hành động</th></tr>
+        <tr><td>Nguyễn Văn A</td><td>Hà Nội - Sapa</td><td>2</td><td>2025-12-20</td><td>Chờ xác nhận</td><td><button>Sửa</button><button>Xóa</button></td></tr>
+      </table>
+    </div>
+
+    <!-- HDV -->
+    <div id="hdv" class="section" style="display:none;">
+      <h1>Quản lý Hướng dẫn viên</h1>
+      <form>
+        <input type="text" placeholder="Họ tên">
+        <input type="date" placeholder="Ngày sinh">
+        <input type="text" placeholder="Chứng chỉ">
+        <input type="text" placeholder="Ngôn ngữ">
+        <button>Thêm HDV</button>
+      </form>
+      <table>
+        <tr><th>Họ tên</th><th>Ngôn ngữ</th><th>Chứng chỉ</th><th>Hành động</th></tr>
+        <tr><td>Trần Văn B</td><td>Tiếng Anh</td><td>HDV Quốc tế</td><td><button>Sửa</button><button>Xóa</button></td></tr>
+      </table>
+    </div>
+
+    <!-- Lịch tour -->
+    <div id="schedule" class="section" style="display:none;">
+      <h1>Lịch khởi hành & phân bổ</h1>
+      <table>
+        <tr><th>Tour</th><th>Ngày</th><th>HDV</th><th>Dịch vụ</th></tr>
+        <tr><td>Hà Nội - Sapa</td><td>2025-12-20</td><td>Trần Văn B</td><td>Xe, KS</td></tr>
+      </table>
+    </div>
+
+    <!-- Báo cáo -->
+    <div id="report" class="section" style="display:none;">
+      <h1>Báo cáo doanh thu</h1>
+      <table>
+        <tr><th>Tour</th><th>Doanh thu</th><th>Chi phí</th><th>Lợi nhuận</th></tr>
+        <tr><td>Hà Nội - Sapa</td><td>6,000,000</td><td>3,500,000</td><td>2,500,000</td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function openTab(evt, tabName) {
+      document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
